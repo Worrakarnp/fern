@@ -4,9 +4,9 @@ import (
 	"context"
 	"strconv"
 
+	"github.com/B5871803/app/ent"
+	"github.com/B5871803/app/ent/petition"
 	"github.com/gin-gonic/gin"
-	"github.com/team19/app/ent"
-	"github.com/team19/app/ent/petition"
 )
 
 // PetitionController defines the struct for the petition controller
@@ -42,7 +42,16 @@ func (ctl *PetitionController) CreatePetition(c *gin.Context) {
 		})
 		return
 	}
-
+	dr, err := ctl.client.Petition.
+		Query().
+		Where(petition.IDEQ(int(obj.Petition))).
+		Only(context.Background())
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "Petition not found",
+		})
+		return
+	}
 	deg, err := ctl.client.Petition.
 		Create().
 		SetPetitionName(obj.PetitionName).

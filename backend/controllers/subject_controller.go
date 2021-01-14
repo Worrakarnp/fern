@@ -4,9 +4,9 @@ import (
 	"context"
 	"strconv"
 
+	"github.com/B5871803/app/ent"
+	"github.com/B5871803/app/ent/subject"
 	"github.com/gin-gonic/gin"
-	"github.com/team19/app/ent"
-	"github.com/team19/app/ent/subject"
 )
 
 // SubjectController defines the struct for the subject controller
@@ -17,8 +17,7 @@ type SubjectController struct {
 
 // Subject defines the struct for the subject controller
 type Subject struct {
-	SubjectName  string
-	
+	SubjectName string
 }
 
 // CreateSubject handles POST requests for adding subject entities
